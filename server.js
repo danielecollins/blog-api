@@ -26,8 +26,7 @@ const PORT = process.env.PORT || 3000;
 // app.use(passport.session());
 
 //enabling CORS for all requests
-app.use(cors())
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(cors());
 
 //routes
 app.use("/", Routes);

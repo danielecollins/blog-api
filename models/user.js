@@ -10,11 +10,15 @@ const userSchema = mongoose.Schema(
     },
     email: {
       type: String,
+      unique: true,
     },
     age: {
       type: String,
     },
     profession: {
+      type: String,
+    },
+    password: {
       type: String,
     },
     level: {
@@ -28,6 +32,7 @@ const userSchema = mongoose.Schema(
   },
   {
     strict: false,
+    collection: "users",
   }
 );
 

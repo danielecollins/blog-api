@@ -5,7 +5,11 @@ const userController = require("../controller/users");
 routes.get("/", userController.getUser);
 
 //get user by username/id?
+<<<<<<< HEAD
 routes.get("/:id", userController.getUserById);
+=======
+routes.get('/:id', userController.getUser);
+>>>>>>> cc8c158f562c7f053b8519cf6b2508badd346e23
 
 //create new user
 routes.post("/", userController.createUser);

@@ -1,0 +1,36 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "an API where we can have authors signup and they can publish articles, the articles are approved by the website admin and the website admin can also set an author to have all their posts approved automatically, and includes courses that can be viewed by users.",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcusBYUI/blog-api.git"
+  },
+  "author": "Ojo-Osasere Ayodeji Marcus, Mavuma Lusanda, Collins Daniel, Bryson Prince, Idoko Samson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarcusBYUI/blog-api/issues"
+  },
+  "homepage": "https://github.com/MarcusBYUI/blog-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "http-errors": "^2.0.0",
+    "joi": "^17.6.0",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.4.4",
+    "nodemon": "^2.0.19",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "swagger-ui-express": "^4.4.0"
+  }
+}

@@ -28,8 +28,8 @@ routes.get("/", (req, res) => {
 //products route
 //routes.use("/products", productsRoute);
 
-//users route
-//routes.use("/users", UsersRoute);
+
+
 
 //api route
 //routes.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

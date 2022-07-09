@@ -28,8 +28,22 @@ routes.get("/", (req, res) => {
 //products route
 //routes.use("/products", productsRoute);
 
-//users route
-//routes.use("/users", UsersRoute);
+//display users data
+routes.get('/', userController.getUser);
+
+//get user by username/id?
+routes.get('/:id', userController.getUser)
+
+//create new user 
+routes.post('/', userController.createUser);
+
+//Update User by id
+routes.put('/:id', userController.updateUser);
+
+//Delete User
+routes.delete('/:id', userController.deleteUser);
+
+
 
 //api route
 //routes.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

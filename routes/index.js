@@ -28,20 +28,6 @@ routes.get("/", (req, res) => {
 //products route
 //routes.use("/products", productsRoute);
 
-//display users data
-routes.get('/', userController.getUser);
-
-//get user by username/id?
-routes.get('/:id', userController.getUser)
-
-//create new user 
-routes.post('/', userController.createUser);
-
-//Update User by id
-routes.put('/:id', userController.updateUser);
-
-//Delete User
-routes.delete('/:id', userController.deleteUser);
 
 
 

@@ -4,32 +4,36 @@ const createError = require("http-errors");
 const swaggerUi = require("swagger-ui-express");
 //const swaggerDocument = require("./swagger-output.json");
 //const authRoute = require("./auth");
+const UsersRoutes = require("./users");
+const PostsRoutes = require("./posts");
+const CommentsRoutes = require("./comment");
+const CoursesRoutes = require("./course");
 
 //express static
 //routes.use(express.static(path.join(__dirname, "../views")));
 
 //Home route
-routes.get("/", (req, res) => {
-  // #swagger.description = 'API home route'
-  // const user = req.user ? req.user : {};
-  // res.render("index", { user: user });
+// routes.get("/", (req, res) => {
+//   // #swagger.description = 'API home route'
+//   // const user = req.user ? req.user : {};
+//   // res.render("index", { user: user });
 
-  res.json({
-    name: "Blog API",
-    version: "1.0.0",
-    description: "",
-    Author: "",
-  });
-});
+//   res.json({
+//     name: "Blog API",
+//     version: "1.0.0",
+//     description: "",
+//     Author: "",
+//   });
+// });
 
-//auth
-//routes.use("/auth", authRoute);
-
-//products route
-//routes.use("/products", productsRoute);
-
-
-
+//users
+routes.get("/users", UsersRoutes);
+//posts
+routes.get("/posts", PostsRoutes);
+//courses
+routes.get("/courses", CoursesRoutes);
+//comments
+routes.get("/comments", CommentsRoutes);
 
 //api route
 //routes.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

@@ -5,10 +5,10 @@
     "description": "A Blog API that allows authors to publish posts and comment on other posts",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "blog-api-group-3.herokuapp.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {

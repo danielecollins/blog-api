@@ -39,12 +39,10 @@ const createUser = async (req, res, next) => {
   try {
     const value = await schema.validateAsync(req.body);
 
-    const password = await bcrypt.hash(value.password, 10);
-
     const user = new User({
       firstName: value.firstName,
       lastName: value.lastName,
-      password: password,
+      password: value.password,
       email: value.email,
       age: value.age,
       profession: value.profession,

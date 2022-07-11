@@ -43,13 +43,15 @@ userSchema.pre("save", function (next) {
 
   if (!this.isModified("password")) return next();
 
+  const self = this;
+
   bcrypt.genSalt(saltRounds, function (err, salt) {
     if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, async function (err, hash) {
+    bcrypt.hash(self.password, salt, async function (err, hash) {
       if (err) return next(err);
 
-      user.password = hash;
+      self.password = hash;
 
       next();
     });

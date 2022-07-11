@@ -7,7 +7,6 @@ const createError = require("http-errors");
 dotenv.config();
 
 passport.serializeUser((user, done) => {
-  console.log(user._id);
   done(null, user._id);
 });
 
@@ -36,7 +35,8 @@ passport.use(
             email: profile.emails[0].value,
           };
           const userSch = new User(doc);
-          await userSch.save();
+          const saveResult = await userSch.save();
+          done(null, saveResult);
         }
       } catch (error) {
         if (error.name == "ValidationError") {

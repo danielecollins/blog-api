@@ -1,8 +1,12 @@
 const routes = require("express").Router();
 const passport = require("passport");
-const { google, googleRedirect, logout } = require("../controller/auth");
+const { google, googleRedirect, logout, login } = require("../controller/auth");
 
+//logout
 routes.get("/logout", logout);
+
+// login
+routes.post("/login", login);
 
 routes.get("/success", (req, res, next) => {
   res.send("User successfully Logged In");

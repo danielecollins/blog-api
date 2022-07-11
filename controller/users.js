@@ -35,6 +35,7 @@ const getUserById = async (req, res, next) => {
     next(error);
   }
 };
+
 const createUser = async (req, res, next) => {
   /*  
   // #swagger.description = 'Adds a new User'
@@ -78,11 +79,16 @@ const createUser = async (req, res, next) => {
       profession: value.profession,
     });
 
-    await user.save();
+    const savedUser = await user.save();
 
-    res.json({
-      status: 200,
-      message: "User registered successfully",
+    req.login(savedUser, function (err) {
+      if (err) {
+        return next(err);
+      }
+      return res.json({
+        status: 200,
+        message: "User registered and loggedIn successfully",
+      });
     });
   } catch (error) {
     if (error.name == "ValidationError") {

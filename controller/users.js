@@ -1,10 +1,35 @@
 const User = require("../models/user");
 const Joi = require("joi");
-const bcrypt = require("bcrypt");
 const createError = require("http-errors");
+const mongoose = require("mongoose");
 
-const getUser = () => {};
-const getUserById = () => {};
+const getUser = async (req, res, next) => {
+  try {
+    const result = await User.find();
+
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+const getUserById = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      next(createError(422, "User does not exist"));
+      return;
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    if (error instanceof mongoose.CastError) {
+      next(createError(422, "Invalid User ID"));
+      return;
+    }
+    next(error);
+  }
+};
 const createUser = async (req, res, next) => {
   /*  
   // #swagger.description = 'Adds a new User'
@@ -62,11 +87,94 @@ const createUser = async (req, res, next) => {
     next(error);
   }
 };
-const updateUser = () => {};
-const deleteUser = () => {};
-const auth = () => {};
-const logout = () => {};
-const UserByUsername = () => {};
+const updateUser = async (req, res, next) => {
+  /*  
+  // #swagger.description = 'Update a User'
+  #swagger.parameters['User'] = {
+                in: 'body',
+                description: 'Update a User',
+                schema: {
+                    $firstName: 'Shawn',
+                    $lastName: 'Potter',
+                    $age: 42,
+                    $email: 'professor@byui.edu',
+                    $password: "Potter11?",
+                    $profession: 'Professor',
+                }
+        }
+        #swagger.responses[200] = {
+            description: 'User successfully updated'}
+        #swagger.responses[422] = {
+            description: 'Please provide information to be updated, User does not exist, No update was made, Invalid user ID'}
+            
+
+        */
+
+  const document = {};
+  const keys = [
+    "firstName",
+    "lastName",
+    "email",
+    "age",
+    "profession",
+    "password",
+  ];
+
+  //get the values from body
+  for (const key in req.body) {
+    if (typeof req.body[key] !== "undefined" && keys.includes(key)) {
+      document[key] = req.body[key];
+    }
+  }
+
+  // check the number of items sent for update
+  if (Object.keys(document).length < 1) {
+    next(createError(422, "Please provide information to be updated"));
+    return;
+  }
+
+  const schema = Joi.object().keys({
+    firstName: Joi.string(),
+    lastName: Joi.string(),
+    password: Joi.string(),
+    email: Joi.string().email(),
+    age: Joi.number(),
+    profession: Joi.string(),
+  });
+
+  try {
+    const value = await schema.validateAsync(document);
+
+    const updateResult = await User.updateOne(
+      {
+        _id: req.params.id,
+      },
+      { $set: value }
+    );
+
+    return updateResult.modifiedCount > 0
+      ? //if update went through
+        res
+          .status(200)
+          .send(`User with Id ${req.params.id} was updated succesfully`)
+      : // if
+      updateResult.matchedCount < 1
+      ? //if product does not exist
+        next(createError(422, "User does not exist"))
+      : // product exist but nothing was updated
+        res.status(200).send(`No update was made`);
+  } catch (error) {
+    if (error instanceof mongoose.CastError) {
+      next(createError(422, "Invalid user ID"));
+      return;
+    }
+    next(error);
+  }
+};
+const deleteUser = async (req, res, next) => {};
+const auth = async (req, res, next) => {};
+const logout = async (req, res, next) => {};
+const UserByUsername = async (req, res, next) => {};
 
 module.exports = {
   getUser,

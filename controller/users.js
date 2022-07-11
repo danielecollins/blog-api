@@ -7,6 +7,11 @@ const getUser = async (req, res, next) => {
   try {
     const result = await User.find();
 
+    if (result.length === 0) {
+      next(createError(404, "No users found"));
+      return;
+    }
+
     res.status(200).json(result);
   } catch (error) {
     next(error);
@@ -171,10 +176,38 @@ const updateUser = async (req, res, next) => {
     next(error);
   }
 };
-const deleteUser = async (req, res, next) => {};
-const auth = async (req, res, next) => {};
-const logout = async (req, res, next) => {};
-const UserByUsername = async (req, res, next) => {};
+const deleteUser = async (req, res, next) => {
+  // #swagger.description = 'Delete an existing user'
+
+  /*
+              #swagger.responses[200] = {
+            description: 'user successfully Deleted'}
+            #swagger.responses[422] = {
+            description: 'Kindly check the provided Id'}
+  
+  */
+
+  try {
+    const result = await User.deleteOne({
+      _id: req.params.id,
+    });
+
+    if (result.deletedCount < 1) {
+      next(createError(422, "User does not exist"));
+      return;
+    }
+
+    res
+      .status(200)
+      .send(`User with Id ${req.params.id} was deleted succesfully`);
+  } catch (error) {
+    if (error instanceof mongoose.CastError) {
+      next(createError(422, "Invalid User ID"));
+      return;
+    }
+    next(error);
+  }
+};
 
 module.exports = {
   getUser,
@@ -182,7 +215,4 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  auth,
-  logout,
-  UserByUsername,
 };

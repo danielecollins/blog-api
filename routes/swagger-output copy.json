@@ -199,15 +199,11 @@
         }
       }
     },
-    "/users/auth/logout": {
+    "/users/logout": {
       "get": {
-        "description": "Logout a User",
+        "description": "",
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       }
     },
     "/users/auth/success": {

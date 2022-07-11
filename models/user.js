@@ -38,9 +38,10 @@ const userSchema = mongoose.Schema(
   }
 );
 
-userSchema.pre("save", (next) => {
+userSchema.pre("save", function (next) {
   // only hash the password if it has been modified (or is new)
-  if (!user.isModified("password")) return next();
+
+  if (!this.isModified("password")) return next();
 
   bcrypt.genSalt(saltRounds, function (err, salt) {
     if (err) return next(err);

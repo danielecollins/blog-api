@@ -5,10 +5,9 @@ const {
   createUser,
   updateUser,
   deleteUser,
-  auth,
-  logout,
-  UserByUsername,
 } = require("../controller/users");
+
+const Authroute = require("./auth");
 
 //display users data
 routes.get("/", getUser);
@@ -26,11 +25,6 @@ routes.put("/:id", updateUser);
 routes.delete("/:id", deleteUser);
 
 //auth login
-routes.get("/auth", auth);
+routes.use("/auth", Authroute);
 
-//user logout
-routes.get("/logout", logout);
-
-//get user by username
-routes.get("/username/:username", UserByUsername);
 module.exports = routes;

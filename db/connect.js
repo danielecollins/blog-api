@@ -11,7 +11,7 @@ const initDb = (callback) => {
   }
   mongoose
     .connect(
-      `mongodb+srv://${process.env.USER}:${process.env.PASS}@free.mr9c9.mongodb.net/blog`
+      `mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.pb9oq.mongodb.net/blog`
     )
     .then((client) => {
       _db = client;

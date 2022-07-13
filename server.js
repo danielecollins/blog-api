@@ -27,7 +27,6 @@ const PORT = process.env.PORT || 3000;
 
 //enabling CORS for all requests
 app.use(cors())
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //routes
 app.use("/", Routes);

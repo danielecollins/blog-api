@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const Comment = require('../models/comment');
 const createError = require("http-errors");
-const comment = require('../models/comment');
-//const ObjectId = require('mongoose').ObjectId;
-
-
 
 
 const getCommentByPostId = () => {};
@@ -33,7 +29,7 @@ const addComment = async (req, res,next) => {
     const newComment = new Comment({content:req.body.content});
     await newComment.save()
     res.json({
-      status: 200,
+      status: 201,
       message: "New comment added",
     });
   } catch (error) {
@@ -46,7 +42,26 @@ const addComment = async (req, res,next) => {
 
   };
 const getCommentByUserID = () => {};
-const deleteComment = () => {};
+const deleteComment = async (req, res, next) => {
+  try {
+
+    const result = await Comment.deleteOne({
+      _id: req.params.id
+    });
+
+    if (result.deletedCount === 1) {
+      res.status(200).json({message: "Successfully deleted one document."});
+    } else {
+      res.status(500).json(result.error || 'No documents matched the query. Deleted 0 documents.')
+    }
+  } catch (error) {
+    if (error instanceof mongoose.CastError) {
+      next(createError(422, "Invalid comment ID"));
+      return;
+    }
+    next(error);
+  }
+};
 const updateComment = () => {};
 
 module.exports = {

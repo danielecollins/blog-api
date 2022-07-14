@@ -3,6 +3,8 @@ const getPostById = () => {};
 const getPostByTitle = () => {};
 const getPostByCategory = () => {};
 const getPostByUser = () => {};
+
+//add a new post
 const addPost = () => {};
 const updatePost = () => {};
 const deletePost = () => {};

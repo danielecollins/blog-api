@@ -3,7 +3,7 @@ POST http://localhost:3000/comments HTTP/1.1
 content-type:application/json
 
 {
-    "content": "I do not like where this is going"
+    "content": "I don't think this belongs here"
   }
 
 ###create new user test
@@ -21,5 +21,8 @@ content-type:application/json
 
 ###get the existing comments
 GET http://localhost:3000/comments/62cf823b0b713104f4fd1948
+
+###ddelete comment using id
+DELETE http://localhost:3000/comments/62cf94847f207dbb4c409ac4
 
 ###

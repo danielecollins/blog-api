@@ -19,4 +19,7 @@ content-type:application/json
   "profession": "student"
 }
 
+###get the existing comments
+GET http://localhost:3000/comments/62cf823b0b713104f4fd1948
+
 ###

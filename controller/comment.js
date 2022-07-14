@@ -35,10 +35,11 @@ const getCommentByID = async (req, res, next) => {
   }
 };
 
-//create a comment
+//create a comment and associate it to a post using post id
 const addComment = async (req, res,next) => {
   try {
     const newComment = new Comment({content:req.body.content});
+    const post = await Post.findById(req.params.id);
     await newComment.save()
     res.json({
       status: 201,

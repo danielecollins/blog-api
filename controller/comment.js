@@ -1,9 +1,21 @@
 const mongoose = require("mongoose");
 const Comment = require('../models/comment');
 const createError = require("http-errors");
+const Post = require('../models/post');
 
 
-const getCommentByPostId = () => {};
+const getCommentByPostId = async (req, res, next) => {
+  try{
+    const result = await Comment.findOne({_id: req.params.postId});
+
+    if(result){
+
+    }
+  }catch(error){
+
+  }
+};
+
 const getCommentByID = async (req, res, next) => {
   try {
 

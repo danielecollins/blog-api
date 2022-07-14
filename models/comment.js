@@ -6,7 +6,7 @@ const commentSchema = mongoose.Schema(
   },
   {
     strict: false,
-    collection: "comment",
+    collection: "comments",
   }, 
   { timestamps: true });
 

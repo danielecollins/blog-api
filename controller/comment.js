@@ -44,25 +44,55 @@ const addComment = async (req, res,next) => {
 const getCommentByUserID = () => {};
 const deleteComment = async (req, res, next) => {
   try {
-
     const result = await Comment.deleteOne({
       _id: req.params.id
     });
 
     if (result.deletedCount === 1) {
+
       res.status(200).json({message: "Successfully deleted one document."});
     } else {
+
       res.status(500).json(result.error || 'No documents matched the query. Deleted 0 documents.')
     }
   } catch (error) {
     if (error instanceof mongoose.CastError) {
+
       next(createError(422, "Invalid comment ID"));
       return;
     }
     next(error);
   }
 };
-const updateComment = () => {};
+
+//update comment
+const updateComment = async(req, res, next) => {
+  try{
+    const myComment = {
+      //to be validated
+      content: req.body.content
+    };
+
+    const updateResult = await Comment.updateOne({
+      _id: req.params.id
+    }, myComment);
+    if (updateResult.modifiedCount > 0) {
+      res.status(200).json({message: "Comment updated successfully!"});
+    } else {
+
+      res.status(200).send(`No update was made`);
+    }
+  
+    //console.log(`${updateResult.modifiedCount} document(s) was updated.`)
+
+  }catch(error){
+    if (error instanceof mongoose.CastError) {
+      next(createError(422, "Invalid content to update"));
+      return;
+    }
+    next(error);
+  }
+};
 
 module.exports = {
   getCommentByPostId,

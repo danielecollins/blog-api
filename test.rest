@@ -25,4 +25,12 @@ GET http://localhost:3000/comments/62cf823b0b713104f4fd1948
 ###ddelete comment using id
 DELETE http://localhost:3000/comments/62cf94847f207dbb4c409ac4
 
+###update/modify the comment
+
+PUT http://localhost:3000/comments/62cf98dad8269d4c36fd27ad HTTP/1.1
+content-type:application/json
+
+{
+    "content": "I don't think this belongs here, it must be updated!"
+  }
 ###

@@ -37,14 +37,26 @@ const getCommentByID = async (req, res, next) => {
 
 //create a comment and associate it to a post using post id
 const addComment = async (req, res,next) => {
+  const content = req.body.content;
+  const id = req.params.id;
   try {
-    const newComment = new Comment({content:req.body.content});
-    const post = await Post.findById(req.params.id);
-    await newComment.save()
-    res.json({
-      status: 201,
-      message: "New comment added",
-    });
+    const newComment = new Comment({content, post:id});
+    
+    //save comment to db
+    await newComment.save();
+
+    //add comment to the related post
+    const relatedPost = await Post.findById(id);
+
+    //push the comment into the post.comments array
+    relatedPost.comments.push(newComment);
+
+    // save and redirect...
+    await relatedPost.save()
+    // res.json({
+    //   status: 201,
+    //   message: "New comment added",
+    // });
   } catch (error) {
     if (error.name == "ValidationError") {
       next(createError.UnprocessableEntity(error.message));

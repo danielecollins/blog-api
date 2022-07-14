@@ -3,7 +3,7 @@ POST http://localhost:3000/comments HTTP/1.1
 content-type:application/json
 
 {
-    "content": "I don't think this belongs here"
+    "content": "I like rainbows"
   }
 
 ###create new user test
@@ -34,3 +34,22 @@ content-type:application/json
     "content": "I don't think this belongs here, it must be updated!"
   }
 ###
+POST http://localhost:3000/posts HTTP/1.1
+content-type:application/json
+
+{
+    "title": "I like rainbows",
+    "body": "This I want to test it is working, I have been working on it all night long",
+    "userId": "userId",
+    "category": "Bakes",
+    "comments":""
+  }
+###add comment to a post
+
+POST http://localhost:3000/comments HTTP/1.1
+content-type:application/json
+
+{
+    "content": "I like rainbows",
+    "post":"62cfbe91164c7ebdb25173ff"
+  }

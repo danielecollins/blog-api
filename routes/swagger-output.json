@@ -535,17 +535,10 @@
         }
       }
     },
-    "/comments/userid/{id}": {
+    "/comments/userid": {
       "get": {
         "description": "Get comment by UserId",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {}
       }
     }

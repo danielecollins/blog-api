@@ -13,7 +13,7 @@
     },
     "oauth": {
       "type": "oauth2",
-      "authorizationUrl": "https://blog-api-group-3.herokuapp.com/users/auth/google",
+      "authorizationUrl": "http://blog-api-group-3.herokuapp.com/users/auth/google",
       "flow": "implicit",
       "scopes": {
         "read:user": "read user data"

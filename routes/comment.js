@@ -17,9 +17,9 @@ const isAuth = (req, res, next) => {
 
 routes.get("/postId/:postId", commentController.getCommentByPostId);
 routes.get("/:id", commentController.getCommentByID);
-routes.post("/", commentController.addComment);
+routes.post("/", isAuth, commentController.addComment);
 routes.get("/userid/:id", isAuth, commentController.getCommentByUserID);
-routes.delete("/:id", commentController.deleteComment);
-routes.put("/:id", commentController.updateComment);
+routes.delete("/:id", isAuth, commentController.deleteComment);
+routes.put("/:id", isAuth, commentController.updateComment);
 
 module.exports = routes;

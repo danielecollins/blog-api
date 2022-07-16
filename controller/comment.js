@@ -75,13 +75,13 @@ const addComment = async (req, res, next) => {
         */
   const schema = Joi.object().keys({
     comment: Joi.string().required(),
-    userId: Joi.string().required(),
     postId: Joi.string().required(),
   });
 
   try {
     const value = await schema.validateAsync(req.body);
-    //create new comment to be associated
+    //add the id of the signed in user
+    value[userId] = req.user.id;
     const newComment = new Comment(value);
     const result = await newComment.save();
     res.status(200).json(result);

@@ -159,6 +159,13 @@ const updateComment = async (req, res, next) => {
   #swagger.parameters['Comment'] = {
                 in: 'body',
                 description: 'Update Comment by CommentId',
+
+                schema: {
+                    $comment: 'This is a test comment',
+                    $postId: 'Pottesuidhnkr',
+                    $userId: "dbfkjdnfdffd",
+                    
+                }
                 
         }
         #swagger.responses[200] = {
@@ -168,9 +175,11 @@ const updateComment = async (req, res, next) => {
             
         */
   const document = {};
+
+  const keys = ["comment", "postId", "userId"];
   // check update body
   for (const key in req.body) {
-    if (typeof req.body[key] !== "undefined" && key.includes(key)) {
+    if (typeof req.body[key] !== "undefined" && keys.includes(key)) {
       document[key] = req.body[key];
     }
   }

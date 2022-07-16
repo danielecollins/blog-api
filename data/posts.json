@@ -1,0 +1,23 @@
+{
+    "post": {
+        "title": "Golf",
+        "body": "I played golf today and I had a lot of fun.",
+        "userid": "62cc0df016d8a89d99e3b702",
+        "category": "Sports",
+        "date": "2022-07-15"
+    },
+    "post2": {
+        "title": "Beach Day",
+        "body": "I went to the beach today and I swam in the ocean.",
+        "userid": "62d3274d428361f6f762c9be",
+        "category": "Outdoors",
+        "date": "2022-07-12"
+    },
+    "post3": {
+        "title": "Hubble Space Telescope",
+        "body": "I was viewing some images from the hubble space telescope the other day.",
+        "userid": "62cdd5e4de4b56730927113c",
+        "category": "Science",
+        "date": "2022-06-27"
+    }
+}

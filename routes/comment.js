@@ -1,6 +1,6 @@
 const express = require("express");
 const createError = require("http-errors");
-const Comment = require("../models/user");
+const Comment = require("../models/comment");
 
 const routes = express.Router({
   mergeParams: true,
@@ -17,11 +17,10 @@ const isAuth = (req, res, next) => {
 };
 
 const isUser = async (req, res, next) => {
-  console.log(req.user);
-  const comment = await Comment.findOne({ userId: req.user.id });
-  console.log(comment);
+  const id = req.user._id.toString();
+  const comment = await Comment.findById(req.params.id);
 
-  if (req.user.id == comment.userId) {
+  if (id == comment.userId) {
     next();
   } else if (req.user.level === "admin") {
     next();

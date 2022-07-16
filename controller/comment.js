@@ -62,8 +62,8 @@ const addComment = async (req, res, next) => {
                 description: 'New Comment',
                 schema: {
                     $comment: 'This is a test comment',
-                    $postId: 'Pottesuidhnkr',
-                    $userId: "dbfkjdnfdffd",
+                    $postId: 'Pottesuidhnkr'
+                    
                     
                 }
         }
@@ -81,7 +81,7 @@ const addComment = async (req, res, next) => {
   try {
     const value = await schema.validateAsync(req.body);
     //add the id of the signed in user
-    value[userId] = req.user.id;
+    value["userId"] = req.user.id;
     const newComment = new Comment(value);
     const result = await newComment.save();
     res.status(200).json(result);
@@ -153,8 +153,7 @@ const updateComment = async (req, res, next) => {
 
                 schema: {
                     $comment: 'This is a test comment',
-                    $postId: 'Pottesuidhnkr',
-                    $userId: "dbfkjdnfdffd",
+                    $postId: 'Pottesuidhnkr'
                     
                 }
                 

@@ -488,13 +488,9 @@
                 "postId": {
                   "type": "string",
                   "example": "Pottesuidhnkr"
-                },
-                "userId": {
-                  "type": "string",
-                  "example": "dbfkjdnfdffd"
                 }
               },
-              "required": ["comment", "postId", "userId"]
+              "required": ["comment", "postId"]
             }
           }
         ],
@@ -523,13 +519,9 @@
                 "postId": {
                   "type": "string",
                   "example": "Pottesuidhnkr"
-                },
-                "userId": {
-                  "type": "string",
-                  "example": "dbfkjdnfdffd"
                 }
               },
-              "required": ["comment", "postId", "userId"]
+              "required": ["comment", "postId"]
             }
           }
         ],

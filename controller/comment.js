@@ -154,6 +154,33 @@ const deleteComment = async (req, res, next) => {
 
 //update comment
 const updateComment = async (req, res, next) => {
+  /*  
+  // #swagger.description = 'Update comment by CommentId'
+  #swagger.parameters['Comment'] = {
+                in: 'body',
+                description: 'Update Comment by CommentId',
+                
+        }
+        #swagger.responses[200] = {
+            description: "Comment Updated"
+        #swagger.responses[422] = {
+            description: 'Please provide information to be updated,No update was made'}
+            
+        */
+  const document = {};
+  // check update body
+  for (const key in req.body) {
+    if (typeof req.body[key] !== "undefined" && key.includes(key)) {
+      document[key] = req.body[key];
+    }
+  }
+
+  // check the number of items sent for update
+  if (Object.keys(document).length < 1) {
+    next(createError(422, "Please provide information to be updated"));
+    return;
+  }
+
   const schema = Joi.object().keys({
     comment: Joi.string(),
     userId: Joi.string(),
@@ -172,7 +199,7 @@ const updateComment = async (req, res, next) => {
     if (updateResult.modifiedCount > 0) {
       res.status(200).json({ message: "Comment updated successfully!" });
     } else {
-      res.status(200).send(`No update was made`);
+      res.status(200).send("No update was made");
     }
 
     //console.log(`${updateResult.modifiedCount} document(s) was updated.`)

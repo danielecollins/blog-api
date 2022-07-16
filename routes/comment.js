@@ -18,8 +18,9 @@ const isAuth = (req, res, next) => {
 
 const isUser = async (req, res, next) => {
   const comment = await Comment.findOne({ userId: req.user.id });
+  console.log(comment);
 
-  if (req.user.id === comment.userId) {
+  if (req.user.id == comment.userId) {
     next();
   } else if (req.user.level === "admin") {
     next();

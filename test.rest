@@ -3,7 +3,7 @@ POST http://localhost:3000/comments HTTP/1.1
 content-type:application/json
 
 {
-    "content": "I like rainbows"
+    "content": "I like rainbows and sprinkles"
   }
 
 ###create new user test
@@ -20,7 +20,7 @@ content-type:application/json
 }
 
 ###get the existing comments
-GET http://localhost:3000/comments/62cf823b0b713104f4fd1948
+GET http://localhost:3000/comments/62d220f961b7c542cad3cb09
 
 ###ddelete comment using id
 DELETE http://localhost:3000/comments/62cf94847f207dbb4c409ac4
@@ -38,18 +38,18 @@ POST http://localhost:3000/posts HTTP/1.1
 content-type:application/json
 
 {
-    "title": "I like rainbows",
-    "body": "This I want to test it is working, I have been working on it all night long",
+    "title": "How to see rainbows",
+    "body": "Go outside after the rain",
     "userId": "userId",
-    "category": "Bakes",
-    "comments":""
+    "category": "Bakes"
   }
-###add comment to a post
+###get post using id
+GET http://localhost:3000/posts/62d200e97c5a96edb6c840b4
 
-POST http://localhost:3000/comments HTTP/1.1
+###add comment to a post
+POST http://localhost:3000/comments/posts/62cfbe91164c7ebdb25173ff HTTP/1.1
 content-type:application/json
 
 {
-    "content": "I like rainbows",
-    "post":"62cfbe91164c7ebdb25173ff"
+    "content": "Testing if this comments will appear in the posts"
   }

@@ -1,21 +1,19 @@
 const mongoose = require("mongoose");
 const Comment = require('../models/comment');
-const createError = require("http-errors");
 const Post = require('../models/post');
+const createError = require("http-errors");
 
 
-const getCommentByPostId = async (req, res, next) => {
+
+const getCommentByPostId = async (req, res) => {
   try{
-    const result = await Comment.findOne({_id: req.params.postId});
-
-    if(result){
-
-    }
-  }catch(error){
-
+    const result = await Comment.find({postId: req.body.postId});
+  }catch(err){
+    console.log(err);
   }
+  
 };
-
+//get a comment using an id
 const getCommentByID = async (req, res, next) => {
   try {
 
@@ -36,23 +34,29 @@ const getCommentByID = async (req, res, next) => {
 };
 
 //create a comment and associate it to a post using post id
-const addComment = async (req, res,next) => {
+const addComment = async (req, res, next) => {
   const content = req.body.content;
-  const id = req.params.id;
+  const postId = req.params.id;
   try {
-    const newComment = new Comment({content, post:id});
+    //create new comment to be associated
+    const newComment = new Comment({content:content,
+                                    post: postId});
     
-    //save comment to db
+    //save comment to db(comment collection)
     await newComment.save();
-
-    //add comment to the related post
-    const relatedPost = await Post.findById(id);
-
+    //find related post by id and add the saved comment
+    const relatedPost = await Post.findById(req.params.id).lean().populate('comments');
+    //console.log(relatedPost);
+    if (!relatedPost) {
+      next(createError(422, "Post does not exist"));
+      return;}else{
+        console.log(relatedPost);
+      }
     //push the comment into the post.comments array
     relatedPost.comments.push(newComment);
 
     // save and redirect...
-    await relatedPost.save()
+    await relatedPost.save();
     // res.json({
     //   status: 201,
     //   message: "New comment added",
@@ -66,7 +70,21 @@ const addComment = async (req, res,next) => {
   }
 
   };
-const getCommentByUserID = () => {};
+const getCommentByUserID = () => {
+
+  try{
+    //check if the person is signed in
+    
+    const findComment = await Comment.find({userId:req.user.id});
+
+    res.status(200).json(findComment);
+
+  }catch(err){
+
+  }
+};
+
+
 const deleteComment = async (req, res, next) => {
   try {
     const result = await Comment.deleteOne({

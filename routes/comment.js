@@ -17,7 +17,7 @@ const isAuth = (req, res, next) => {
 };
 
 const isUser = async (req, res, next) => {
-  const comment = await Comment.findOne({ userId: req.params.id });
+  const comment = await Comment.findOne({ userId: req.user.id });
 
   if (req.user.id === comment.userId) {
     next();

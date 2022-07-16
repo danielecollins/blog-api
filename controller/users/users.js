@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../../models/user");
 const Joi = require("joi");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
@@ -17,6 +17,7 @@ const getUser = async (req, res, next) => {
     next(error);
   }
 };
+
 const getUserById = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
@@ -98,6 +99,7 @@ const createUser = async (req, res, next) => {
     next(error);
   }
 };
+
 const updateUser = async (req, res, next) => {
   /*  
   // #swagger.description = 'Update a User'
@@ -182,6 +184,7 @@ const updateUser = async (req, res, next) => {
     next(error);
   }
 };
+
 const deleteUser = async (req, res, next) => {
   // #swagger.description = 'Delete an existing user'
 

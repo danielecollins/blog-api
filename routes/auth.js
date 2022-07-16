@@ -1,6 +1,11 @@
 const routes = require("express").Router();
 const passport = require("passport");
-const { google, googleRedirect, logout, login } = require("../controller/auth");
+const {
+  google,
+  googleRedirect,
+  logout,
+  login,
+} = require("../controller/auth/auth");
 
 //logout
 routes.get("/logout", logout);

@@ -5,7 +5,7 @@ const {
   createUser,
   updateUser,
   deleteUser,
-} = require("../controller/users");
+} = require("../controller/users/users");
 
 const Authroute = require("./auth");
 
@@ -13,7 +13,7 @@ const isAuth = async (req, res, next) => {
   if (req.user) {
     next();
   } else {
-    res.send("This is a protected resouce, log in to continue");
+    res.send("This is a protected resource, log in to continue");
   }
 };
 

@@ -1,6 +1,6 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
-const User = require("../models/user");
+const User = require("../../models/user");
 const Joi = require("joi");
 const createError = require("http-errors");
 

@@ -420,15 +420,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "Comment",
-            "in": "body",
-            "description": "Get Comment by PostId",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
           }
         ],
         "responses": {
@@ -447,15 +438,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "Comment",
-            "in": "body",
-            "description": "Get Comment by CommentId",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
           }
         ],
         "responses": {
@@ -472,15 +454,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "Comment",
-            "in": "body",
-            "description": "Delete comment by CommentId",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
           }
         ],
         "responses": {
@@ -579,15 +552,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "Comment",
-            "in": "body",
-            "description": "Get Comment by UserId",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
           }
         ],
         "responses": {}

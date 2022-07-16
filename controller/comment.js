@@ -6,11 +6,7 @@ const Joi = require("joi");
 const getCommentByPostId = async (req, res, next) => {
   /*  
   // #swagger.description = 'Get comment by PostId'
-  #swagger.parameters['Comment'] = {
-                in: 'body',
-                description: 'Get Comment by PostId',
-                
-        }
+  
         #swagger.responses[200] = {
             description: [array of comments]}
         #swagger.responses[422] = {
@@ -33,11 +29,7 @@ const getCommentByPostId = async (req, res, next) => {
 const getCommentByID = async (req, res, next) => {
   /*  
   // #swagger.description = 'Get comment by CommentId'
-  #swagger.parameters['Comment'] = {
-                in: 'body',
-                description: 'Get Comment by CommentId',
-                
-        }
+
         #swagger.responses[200] = {
             description: {a comment object}}
         #swagger.responses[422] = {
@@ -100,11 +92,7 @@ const addComment = async (req, res, next) => {
 const getCommentByUserID = async () => {
   /*  
   // #swagger.description = 'Get comment by UserId'
-  #swagger.parameters['Comment'] = {
-                in: 'body',
-                description: 'Get Comment by UserId',
-                
-        }
+  
         #swagger.responses[200] = {
             description: [array of comments]}
         #swagger.responses[422] = {
@@ -128,11 +116,7 @@ const getCommentByUserID = async () => {
 const deleteComment = async (req, res, next) => {
   /*  
   // #swagger.description = 'Delete comment by CommentId'
-  #swagger.parameters['Comment'] = {
-                in: 'body',
-                description: 'Delete comment by CommentId',
-                
-        }
+  
         #swagger.responses[200] = {
             description: "Successfully deleted one document."}
         #swagger.responses[422] = {

@@ -81,9 +81,16 @@ const addComment = async (req, res, next) => {
             description: 'Kindly check the provided data'}
             
         */
+  const schema = Joi.object().keys({
+    comment: Joi.string().required(),
+    userId: Joi.string().required(),
+    postId: Joi.string().required(),
+  });
+
   try {
+    const value = await schema.validateAsync(req.body);
     //create new comment to be associated
-    const newComment = new Comment(req.body);
+    const newComment = new Comment(value);
     const result = await newComment.save();
     res.status(200).json(result);
   } catch (error) {

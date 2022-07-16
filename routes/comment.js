@@ -15,7 +15,7 @@ const isAuth = (req, res, next) => {
     }
 }
 
-routes.get("/:id/:id", commentController.getCommentByPostId);
+routes.get("/postId/:postId", commentController.getCommentByPostId);
 routes.get("/:id", commentController.getCommentByID);
 routes.post("/posts/:id/", commentController.addComment);
 routes.get("/userid/:id", isAuth, commentController.getCommentByUserID);

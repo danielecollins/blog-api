@@ -13,16 +13,16 @@
     },
     "oauth": {
       "type": "oauth2",
-      "authorizationUrl": "http://localhost:3000/users/auth/google",
+      "authorizationUrl": "https://blog-api-group-3.herokuapp.com/users/auth/google",
       "flow": "implicit",
       "scopes": {
         "read:user": "read user data"
       }
     }
   },
-  "host": "localhost:3000",
+  "host": "blog-api-group-3.herokuapp.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {

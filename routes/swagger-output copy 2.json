@@ -5,11 +5,24 @@
     "description": "A Blog API that allows authors to publish posts and comment on other posts",
     "version": "1.0.0"
   },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "oauth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://blog-api-group-3.herokuapp.com/users/auth/google",
+      "flow": "implicit",
+      "scopes": {
+        "read:user": "read user data"
+      }
+    }
+  },
   "host": "blog-api-group-3.herokuapp.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
@@ -217,10 +230,7 @@
                   "example": "Potter11?"
                 }
               },
-              "required": [
-                "email",
-                "password"
-              ]
+              "required": ["email", "password"]
             }
           }
         ],

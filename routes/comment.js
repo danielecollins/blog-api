@@ -32,7 +32,7 @@ const isUser = async (req, res, next) => {
 routes.get("/postId/:postId", commentController.getCommentByPostId);
 routes.get("/:id", commentController.getCommentByID);
 routes.post("/", isAuth, commentController.addComment);
-routes.get("/userid/:id", isAuth, commentController.getCommentByUserID);
+routes.get("/userid", isAuth, commentController.getCommentByUserID);
 routes.delete("/:id", isAuth, isUser, commentController.deleteComment);
 routes.put("/:id", isAuth, isUser, commentController.updateComment);
 

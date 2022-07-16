@@ -102,7 +102,7 @@ const getCommentByUserID = async () => {
   try {
     //check if the person is signed in
 
-    const findComment = await Comment.find({ userId: req.user.id });
+    const findComment = await Comment.find({ userId: req.user._id });
 
     if (findComment.length === 0) {
       next(createError(422, "No comment for this post"));

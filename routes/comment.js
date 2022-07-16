@@ -17,6 +17,7 @@ const isAuth = (req, res, next) => {
 };
 
 const isUser = async (req, res, next) => {
+  console.log(req.user);
   const comment = await Comment.findOne({ userId: req.user.id });
   console.log(comment);
 

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Comment = require("../models/comment");
 const createError = require("http-errors");
+const Joi = require("joi");
 
 const getCommentByPostId = async (req, res, next) => {
   /*  
@@ -118,6 +119,19 @@ const getCommentByUserID = async () => {
 };
 
 const deleteComment = async (req, res, next) => {
+  /*  
+  // #swagger.description = 'Delete comment by CommentId'
+  #swagger.parameters['Comment'] = {
+                in: 'body',
+                description: 'Delete comment by CommentId',
+                
+        }
+        #swagger.responses[200] = {
+            description: "Successfully deleted one document."}
+        #swagger.responses[422] = {
+            description: 'No comment to delete'}
+            
+        */
   try {
     const result = await Comment.deleteOne({
       _id: req.params.id,
@@ -126,11 +140,8 @@ const deleteComment = async (req, res, next) => {
     if (result.deletedCount === 1) {
       res.status(200).json({ message: "Successfully deleted one document." });
     } else {
-      res
-        .status(500)
-        .json(
-          result.error || "No documents matched the query. Deleted 0 documents."
-        );
+      next(createError(422, "No comment to delete"));
+      return;
     }
   } catch (error) {
     if (error instanceof mongoose.CastError) {
@@ -143,17 +154,20 @@ const deleteComment = async (req, res, next) => {
 
 //update comment
 const updateComment = async (req, res, next) => {
+  const schema = Joi.object().keys({
+    comment: Joi.string(),
+    userId: Joi.string(),
+    postId: Joi.string(),
+  });
+
   try {
-    const myComment = {
-      //to be validated
-      content: req.body.content,
-    };
+    const value = await schema.validateAsync(req.body);
 
     const updateResult = await Comment.updateOne(
       {
         _id: req.params.id,
       },
-      myComment
+      value
     );
     if (updateResult.modifiedCount > 0) {
       res.status(200).json({ message: "Comment updated successfully!" });

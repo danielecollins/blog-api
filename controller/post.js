@@ -1,4 +1,4 @@
-const Post = require("../../models/post");
+const Post = require("../models/post");
 const Joi = require("joi");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
@@ -124,7 +124,6 @@ const updatePost = async (req, res, next) => {
   const keys = [
     "title",
     "body",
-    "userid",
     "category"
   ];
 
@@ -142,7 +141,6 @@ const updatePost = async (req, res, next) => {
   const schema = Joi.object().keys({
     title: Joi.string().required(),
     body: Joi.string().required(),
-    userid: Joi.string().required(),
     category: Joi.string().required(),
   });
 
@@ -168,6 +166,7 @@ const updatePost = async (req, res, next) => {
     next(error);
   }
 };
+
 const deletePost = async (req, res, next) => {
   try {
     const result = await Post.deleteOne({ _id: req.params.id });

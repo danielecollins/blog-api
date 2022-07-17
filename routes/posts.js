@@ -28,10 +28,10 @@ routes.get("/:id", getPostById);
 routes.get("/title/:title", getPostByTitle);
 //Get all posts in a certain category
 routes.get("/category/:category", getPostByCategory);
-//Get all posts for a user
-routes.get("/user/:user", getPostByUser);
+//Get all posts for a user by user id
+routes.get("/user/:userid", getPostByUser);
 //Create a post
-routes.post("/:id", isAuth, addPost);
+routes.post("/", isAuth, addPost);
 //Update a post
 routes.put("/:id", isAuth, updatePost);
 //Delete a post

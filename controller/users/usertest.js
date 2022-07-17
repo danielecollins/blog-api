@@ -1,20 +1,15 @@
-const User = require("../../models/user");
-const mongoose = require("mongoose");
-const { agent, SuperAgentTest } = require("supertest");
+const { agent } = require("supertest");
 const app = require("../../app");
 const mongodb = require("../../db/connect");
-const { request } = require("../../app");
 
 let testRequest;
 
-beforeAll(() => {
+beforeAll(async () => {
   //start server and db
 
-  mongodb.initDb((err, mongodb) => {
+  await mongodb.initDb((err, mongodb) => {
     if (err) {
       console.log(err);
-    } else {
-      console.log(`Connected to DB`);
     }
   });
 
@@ -22,6 +17,7 @@ beforeAll(() => {
 }, 20000);
 
 const userTest = () => {
+  let testId;
   //get all users
   //should return that user is not logged in
   test("Get all users", async () => {
@@ -32,7 +28,43 @@ const userTest = () => {
     );
   });
 
-  //log user in
+  //create a new user and login
+  test("Create a User", async () => {
+    const response = await testRequest.post("/users").send({
+      firstName: "Shawn",
+      lastName: "Potter",
+      age: 42,
+      email: "profsor@byui.edu",
+      password: "Potter11?",
+      profession: "Professor",
+    });
+
+    const data = JSON.parse(response.text);
+
+    expect(data.message).toBe("User registered and loggedIn successfully");
+  });
+
+  //get all users after login
+  test("Get all users: called by a logged in user", async () => {
+    const response = await testRequest.get("/users");
+    // get the id of the just created user
+    const data = JSON.parse(response.text);
+
+    //get id of the last created user to use for update and delete later
+    testId = data[data.length - 1]._id;
+
+    // a logged in user would receive an array of users rather than a text from the first test
+    expect(Array.isArray(data)).toBe(true);
+  });
+
+  //Log user out
+  test("Log User Out", async () => {
+    const response = await testRequest.get("/users/auth/logout");
+
+    expect(response.text).toBe("Logout Succeful");
+  });
+
+  //log admin in //hasright to manage all users
   test("Log User In", async () => {
     const response = await testRequest.post("/users/auth/login").send({
       email: "professor@byui.edu",
@@ -42,10 +74,34 @@ const userTest = () => {
     expect(response.text).toBe("User successfully Logged In");
   }, 10000);
 
-  test("Get all lusers", async () => {
-    const response = await testRequest.get("/users");
+  // The following scenerios
+  // is for when a an admin is logged in and makes update and delete the user that was
+  // created in the second test
 
-    console.log(response.text);
+  test("Get user by Id", async () => {
+    //checks that the returned value is an object
+    const response = await testRequest.get(`/users/${testId}`);
+
+    //the next expression will return true since a returned document always as the _id key
+    expect(response._body.hasOwnProperty("_id")).toBe(true);
+  });
+
+  test("Update a User", async () => {
+    const response = await testRequest.put(`/users/${testId}`).send({
+      firstName: "User Test",
+    });
+
+    expect(response.text).toBe(
+      `User with Id ${testId} was updated succesfully`
+    );
+  });
+
+  test("Delete a User", async () => {
+    const response = await testRequest.delete(`/users/${testId}`);
+
+    expect(response.text).toBe(
+      `User with Id ${testId} was deleted succesfully`
+    );
   });
 };
 

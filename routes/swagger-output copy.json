@@ -199,11 +199,52 @@
         }
       }
     },
-    "/users/logout": {
+    "/users/auth/logout": {
       "get": {
-        "description": "",
+        "description": "Logout a User",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/auth/login": {
+      "post": {
+        "description": "Login a User",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "Login User",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "professor@byui.edu"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Potter11?"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully Logged In"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
       }
     },
     "/users/auth/success": {
@@ -235,22 +276,53 @@
       "get": {
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
       "post": {
         "description": "",
-        "parameters": [],
-        "responses": {}
-      },
-      "put": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      },
-      "delete": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "Post",
+            "in": "body",
+            "description": "Create a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Post Title"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "Post body."
+                },
+                "userid": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Category Name"
+                }
+              },
+              "required": [
+                "title",
+                "body",
+                "userid",
+                "category"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/posts/{id}": {
@@ -264,7 +336,70 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Post",
+            "in": "body",
+            "description": "Update a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Post Title"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "Post body."
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Category Name"
+                }
+              },
+              "required": [
+                "title",
+                "body",
+                "category"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/posts/title/{title}": {
@@ -278,7 +413,11 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/posts/category/{category}": {
@@ -292,20 +431,101 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
-    "/posts/user/{user}": {
+    "/posts/user/{userid}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "user",
+            "name": "userid",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/posts/auth/logout": {
+      "get": {
+        "description": "Logout a User",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/posts/auth/login": {
+      "post": {
+        "description": "Login a User",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "Login User",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "professor@byui.edu"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Potter11?"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully Logged In"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
+      }
+    },
+    "/posts/auth/success": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/posts/auth/google": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/posts/auth/google/redirect": {
+      "get": {
+        "description": "",
+        "parameters": [],
         "responses": {}
       }
     },

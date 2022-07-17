@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Comment = require("../models/comment");
+const Comment = require("../../models/comment");
 const createError = require("http-errors");
 const Joi = require("joi");
 
@@ -46,7 +46,7 @@ const getCommentByID = async (req, res, next) => {
     res.status(200).json(comment);
   } catch (error) {
     if (error instanceof mongoose.CastError) {
-      next(createError(422, "Invalid comment ID"));
+      next(createError(422, "Invalid comment IDttttt"));
       return;
     }
     next(error);
@@ -89,7 +89,8 @@ const addComment = async (req, res, next) => {
     next(error);
   }
 };
-const getCommentByUserID = async () => {
+
+const getCommentByUserID = async (req, res, next) => {
   /*  
   // #swagger.description = 'Get comment by UserId'
   
@@ -100,9 +101,7 @@ const getCommentByUserID = async () => {
             
         */
   try {
-    //check if the person is signed in
-
-    const findComment = await Comment.find({ userId: req.user._id });
+    const findComment = await Comment.find({ userId: req.user._id.toString() });
 
     if (findComment.length === 0) {
       next(createError(422, "No comment for this post"));
@@ -110,7 +109,9 @@ const getCommentByUserID = async () => {
     }
 
     res.status(200).json(findComment);
-  } catch (err) {}
+  } catch (err) {
+    next(err);
+  }
 };
 
 const deleteComment = async (req, res, next) => {

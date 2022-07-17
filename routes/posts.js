@@ -8,7 +8,7 @@ const {
   addPost,
   updatePost,
   deletePost,
-} = require("../controller/post");
+} = require("../controller/post/post");
 
 routes.get("/", getAllPost);
 routes.get("/:id", getPostById);

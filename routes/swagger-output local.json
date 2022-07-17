@@ -199,11 +199,49 @@
         }
       }
     },
-    "/users/logout": {
+    "/users/auth/logout": {
       "get": {
-        "description": "",
+        "description": "Logout a User",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/auth/login": {
+      "post": {
+        "description": "Login a User",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "Login User",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "professor@byui.edu"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Potter11?"
+                }
+              },
+              "required": ["email", "password"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully Logged In"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
       }
     },
     "/users/auth/success": {
@@ -373,23 +411,27 @@
         "responses": {}
       }
     },
-    "/comments/postid/{id}": {
+    "/comments/postId/{postId}": {
       "get": {
-        "description": "",
+        "description": "Get comment by PostId",
         "parameters": [
           {
-            "name": "id",
+            "name": "postId",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/comments/{id}": {
       "get": {
-        "description": "",
+        "description": "Get comment by CommentId",
         "parameters": [
           {
             "name": "id",
@@ -398,10 +440,14 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
       "delete": {
-        "description": "",
+        "description": "Delete comment by CommentId",
         "parameters": [
           {
             "name": "id",
@@ -410,40 +456,94 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successfully deleted one document."
+          },
+          "422": {
+            "description": "No comment to delete"
+          }
+        }
       },
       "put": {
-        "description": "",
+        "description": "Update comment by CommentId",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "Comment",
+            "in": "body",
+            "description": "Update Comment by CommentId",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "string",
+                  "example": "This is a test comment"
+                },
+                "postId": {
+                  "type": "string",
+                  "example": "Pottesuidhnkr"
+                }
+              },
+              "required": ["comment", "postId"]
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/comments/": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/comments/userid/{id}": {
-      "get": {
-        "description": "",
+        "description": "Adds a new Comment",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "Comment",
+            "in": "body",
+            "description": "New Comment",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "string",
+                  "example": "This is a test comment"
+                },
+                "postId": {
+                  "type": "string",
+                  "example": "Pottesuidhnkr"
+                }
+              },
+              "required": ["comment", "postId"]
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Comment successfully added"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
+      }
+    },
+    "/comments/user/comment": {
+      "get": {
+        "description": "Get comment by UserId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   }

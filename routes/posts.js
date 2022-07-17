@@ -8,7 +8,7 @@ const {
   addPost,
   updatePost,
   deletePost,
-} = require("../controller/post");
+} = require("../controller/post/post");
 
 const Authroute = require("./auth");
 

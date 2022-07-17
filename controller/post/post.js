@@ -1,8 +1,8 @@
-const Post = require("../models/post");
+const Post = require("../../models/post");
 const Joi = require("joi");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
-const user = require("../models/user");
+const user = require("../../models/user");
 
 const getAllPost = async (req, res, next) => {
   try {
@@ -87,6 +87,26 @@ const getPostByUser = async (req, res, next) => {
 };
 
 const addPost = async (req, res, next) => {
+  /*  
+  // #swagger.description = 'Create a post'
+  #swagger.parameters['Post'] = {
+                in: 'body',
+                description: 'Create a post',
+                schema: {
+                    $title: 'Post Title',
+                    $body: 'Post body.',
+                    $userid: '1',
+                    $category: 'Category Name',
+                }
+        }
+        #swagger.responses[200] = {
+            description: 'Post successfully created'}
+        #swagger.responses[422] = {
+            description: 'Please check the provided data'}
+            
+
+        */
+
   const schema = Joi.object().keys({
     title: Joi.string().required(),
     body: Joi.string().required(),
@@ -120,6 +140,25 @@ const addPost = async (req, res, next) => {
 };
 
 const updatePost = async (req, res, next) => {
+  /*  
+  // #swagger.description = 'Update a post'
+  #swagger.parameters['Post'] = {
+                in: 'body',
+                description: 'Update a post',
+                schema: {
+                    $title: 'Post Title',
+                    $body: 'Post body.',
+                    $category: 'Category Name',
+                }
+        }
+        #swagger.responses[200] = {
+            description: 'Post successfully updated'}
+        #swagger.responses[422] = {
+            description: 'Please provide information to be updated, Post does not exist, No update was made, Invalid post ID'}
+            
+
+        */
+
   const document = {};
   const keys = [
     "title",
@@ -168,6 +207,16 @@ const updatePost = async (req, res, next) => {
 };
 
 const deletePost = async (req, res, next) => {
+  // #swagger.description = 'Delete an existing post'
+
+  /*
+              #swagger.responses[200] = {
+            description: 'Post successfully Deleted'}
+            #swagger.responses[422] = {
+            description: 'Please check the provided post Id'}
+  
+  */
+
   try {
     const result = await Post.deleteOne({ _id: req.params.id });
 

@@ -4,7 +4,7 @@
   "description": "an API where we can have authors signup and they can publish articles, the articles are approved by the website admin and the website admin can also set an author to have all their posts approved automatically, and includes courses that can be viewed by users.",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "start": "node server.js"
   },
   "repository": {

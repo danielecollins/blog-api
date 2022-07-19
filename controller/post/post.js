@@ -147,9 +147,9 @@ const updatePost = async (req, res, next) => {
                 in: 'body',
                 description: 'Update a post',
                 schema: {
-                    $title: 'Post Title',
-                    $body: 'Post body.',
-                    $category: 'Category Name',
+                    title: 'Post Title',
+                    body: 'Post body.',
+                    category: 'Category Name',
                 }
         }
         #swagger.responses[200] = {

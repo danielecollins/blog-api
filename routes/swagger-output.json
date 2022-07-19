@@ -5,24 +5,11 @@
     "description": "A Blog API that allows authors to publish posts and comment on other posts",
     "version": "1.0.0"
   },
-  "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
-    },
-    "oauth": {
-      "type": "oauth2",
-      "authorizationUrl": "http://localhost:3000/users/auth/google",
-      "flow": "implicit",
-      "scopes": {
-        "read:user": "read user data"
-      }
-    }
-  },
-  "host": "localhost:3000",
+  "host": "blog-api-group-3.herokuapp.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/": {
       "get": {
@@ -276,53 +263,22 @@
       "get": {
         "description": "",
         "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       },
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "Post",
-            "in": "body",
-            "description": "Create a post",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "Post Title"
-                },
-                "body": {
-                  "type": "string",
-                  "example": "Post body."
-                },
-                "userid": {
-                  "type": "string",
-                  "example": "1"
-                },
-                "category": {
-                  "type": "string",
-                  "example": "Category Name"
-                }
-              },
-              "required": [
-                "title",
-                "body",
-                "userid",
-                "category"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "parameters": [],
+        "responses": {}
+      },
+      "put": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
       }
     },
     "/posts/{id}": {
@@ -336,70 +292,7 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Post",
-            "in": "body",
-            "description": "Update a post",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "Post Title"
-                },
-                "body": {
-                  "type": "string",
-                  "example": "Post body."
-                },
-                "category": {
-                  "type": "string",
-                  "example": "Category Name"
-                }
-              },
-              "required": [
-                "title",
-                "body",
-                "category"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       }
     },
     "/posts/title/{title}": {
@@ -413,11 +306,7 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       }
     },
     "/posts/category/{category}": {
@@ -431,119 +320,79 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": {}
       }
     },
-    "/posts/user/{userid}": {
+    "/posts/user/{user}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "userid",
+            "name": "user",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/posts/auth/logout": {
-      "get": {
-        "description": "Logout a User",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/posts/auth/login": {
-      "post": {
-        "description": "Login a User",
-        "parameters": [
-          {
-            "name": "User",
-            "in": "body",
-            "description": "Login User",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string",
-                  "example": "professor@byui.edu"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "Potter11?"
-                }
-              },
-              "required": [
-                "email",
-                "password"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User successfully Logged In"
-          },
-          "422": {
-            "description": "Kindly check the provided data"
-          }
-        }
-      }
-    },
-    "/posts/auth/success": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/posts/auth/google": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/posts/auth/google/redirect": {
-      "get": {
-        "description": "",
-        "parameters": [],
         "responses": {}
       }
     },
     "/courses/": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Adds a new Course",
+        "parameters": [
+          {
+            "name": "Course",
+            "in": "body",
+            "description": "New Course",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "CSE341"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Web Development"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "01/01/2022"
+                }
+              },
+              "required": [
+                "title",
+                "category"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Course successfully added"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
       },
       "get": {
-        "description": "",
+        "description": "Gets all Courses",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "404": {
+            "description": "No Courses Found"
+          }
+        }
       }
     },
     "/courses/title/{title}": {
       "get": {
-        "description": "",
+        "description": "Gets all Courses with the given title",
         "parameters": [
           {
             "name": "title",
@@ -552,12 +401,19 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "404": {
+            "description": "No Courses Found"
+          }
+        }
       }
     },
     "/courses/{id}": {
       "get": {
-        "description": "",
+        "description": "Gets one Course using its ID",
         "parameters": [
           {
             "name": "id",
@@ -566,22 +422,71 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "404": {
+            "description": "Course does not exist"
+          },
+          "422": {
+            "description": "Invalid Course ID"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       },
       "put": {
-        "description": "",
+        "description": "Updates Course",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "Course",
+            "in": "body",
+            "description": "Update Course",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "CSE341"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Web Development"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "01/01/2022"
+                }
+              },
+              "required": [
+                "title",
+                "category"
+              ]
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Course successfully added"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
       },
       "delete": {
-        "description": "",
+        "description": "Gets all Courses with the given title",
         "parameters": [
           {
             "name": "id",
@@ -590,26 +495,37 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "422": {
+            "description": "No Courses Found or Bad Course ID"
+          }
+        }
       }
     },
-    "/comments/postid/{id}": {
+    "/comments/postId/{postId}": {
       "get": {
-        "description": "",
+        "description": "Get comment by PostId",
         "parameters": [
           {
-            "name": "id",
+            "name": "postId",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/comments/{id}": {
       "get": {
-        "description": "",
+        "description": "Get comment by CommentId",
         "parameters": [
           {
             "name": "id",
@@ -618,10 +534,14 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
       "delete": {
-        "description": "",
+        "description": "Delete comment by CommentId",
         "parameters": [
           {
             "name": "id",
@@ -630,40 +550,100 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successfully deleted one document."
+          },
+          "422": {
+            "description": "No comment to delete"
+          }
+        }
       },
       "put": {
-        "description": "",
+        "description": "Update comment by CommentId",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "Comment",
+            "in": "body",
+            "description": "Update Comment by CommentId",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "string",
+                  "example": "This is a test comment"
+                },
+                "postId": {
+                  "type": "string",
+                  "example": "Pottesuidhnkr"
+                }
+              },
+              "required": [
+                "comment",
+                "postId"
+              ]
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/comments/": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/comments/userid/{id}": {
-      "get": {
-        "description": "",
+        "description": "Adds a new Comment",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "Comment",
+            "in": "body",
+            "description": "New Comment",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "comment": {
+                  "type": "string",
+                  "example": "This is a test comment"
+                },
+                "postId": {
+                  "type": "string",
+                  "example": "Pottesuidhnkr"
+                }
+              },
+              "required": [
+                "comment",
+                "postId"
+              ]
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Comment successfully added"
+          },
+          "422": {
+            "description": "Kindly check the provided data"
+          }
+        }
+      }
+    },
+    "/comments/user/comment": {
+      "get": {
+        "description": "Get comment by UserId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   }

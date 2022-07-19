@@ -1,3 +1,4 @@
+
 const Post = require("../../models/post");
 const Joi = require("joi");
 const createError = require("http-errors");
@@ -234,6 +235,7 @@ const deletePost = async (req, res, next) => {
     next(error);
   }
 };
+
 
 module.exports = {
   getAllPost,

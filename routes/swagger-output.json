@@ -5,11 +5,24 @@
     "description": "A Blog API that allows authors to publish posts and comment on other posts",
     "version": "1.0.0"
   },
-  "host": "blog-api-group-3.herokuapp.com",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "oauth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://localhost:3000/users/auth/google",
+      "flow": "implicit",
+      "scopes": {
+        "read:user": "read user data"
+      }
+    }
+  },
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/": {
       "get": {
@@ -217,10 +230,7 @@
                   "example": "Potter11?"
                 }
               },
-              "required": [
-                "email",
-                "password"
-              ]
+              "required": ["email", "password"]
             }
           }
         ],
@@ -296,12 +306,7 @@
                   "example": "Category Name"
                 }
               },
-              "required": [
-                "title",
-                "body",
-                "userid",
-                "category"
-              ]
+              "required": ["title", "body", "userid", "category"]
             }
           }
         ],
@@ -361,11 +366,7 @@
                   "example": "Category Name"
                 }
               },
-              "required": [
-                "title",
-                "body",
-                "category"
-              ]
+              "required": ["title", "body", "category"]
             }
           }
         ],
@@ -476,10 +477,7 @@
                   "example": "01/01/2022"
                 }
               },
-              "required": [
-                "title",
-                "category"
-              ]
+              "required": ["title", "category"]
             }
           }
         ],
@@ -581,10 +579,7 @@
                   "example": "01/01/2022"
                 }
               },
-              "required": [
-                "title",
-                "category"
-              ]
+              "required": ["title", "category"]
             }
           }
         ],
@@ -705,10 +700,7 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": [
-                "comment",
-                "postId"
-              ]
+              "required": ["comment", "postId"]
             }
           }
         ],
@@ -742,10 +734,7 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": [
-                "comment",
-                "postId"
-              ]
+              "required": ["comment", "postId"]
             }
           }
         ],

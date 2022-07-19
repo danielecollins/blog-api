@@ -82,8 +82,10 @@ const userTest = () => {
     //checks that the returned value is an object
     const response = await testRequest.get(`/users/${testId}`);
 
-    //the next expression will return true since a returned document always as the _id key
-    expect(response._body.hasOwnProperty("_id")).toBe(true);
+    const data = JSON.parse(response.text);
+
+    //expect id of returned user to be same as the query
+    expect(data._id).toBe(`${testId}`);
   });
 
   test("Update a User", async () => {
@@ -102,6 +104,13 @@ const userTest = () => {
     expect(response.text).toBe(
       `User with Id ${testId} was deleted succesfully`
     );
+  });
+
+  //Log user out
+  test("Log User Out", async () => {
+    const response = await testRequest.get("/users/auth/logout");
+
+    expect(response.text).toBe("Logout Succeful");
   });
 };
 

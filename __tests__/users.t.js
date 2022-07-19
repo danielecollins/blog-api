@@ -1,3 +1,3 @@
 const { userTest } = require("../controller/users/usertest");
 
-describe("Test User Controllers", userTest);
+describe("Test User Controller", userTest);

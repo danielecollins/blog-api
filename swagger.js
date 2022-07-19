@@ -6,8 +6,8 @@ const doc = {
     description:
       "A Blog API that allows authors to publish posts and comment on other posts",
   },
-  host: "localhost:3000",
-  schemes: ["http"],
+  host: "blog-api-group-3.herokuapp.com",
+  schemes: ["https"],
 };
 
 const outputFile = "./routes/swagger-output.json";

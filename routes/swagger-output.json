@@ -297,16 +297,12 @@
                   "type": "string",
                   "example": "Post body."
                 },
-                "userid": {
-                  "type": "string",
-                  "example": "1"
-                },
                 "category": {
                   "type": "string",
                   "example": "Category Name"
                 }
               },
-              "required": ["title", "body", "userid", "category"]
+              "required": ["title", "body", "category"]
             }
           }
         ],

@@ -1,4 +1,3 @@
-
 const Post = require("../../models/post");
 const Joi = require("joi");
 const createError = require("http-errors");
@@ -8,7 +7,7 @@ const user = require("../../models/user");
 const getAllPost = async (req, res, next) => {
   try {
     const result = await Post.find();
-    
+
     if (result.length === 0) {
       next(createError(404, "No posts found"));
       return;
@@ -16,7 +15,7 @@ const getAllPost = async (req, res, next) => {
 
     res.status(200).json(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
 
@@ -42,7 +41,7 @@ const getPostById = async (req, res, next) => {
 const getPostByTitle = async (req, res, next) => {
   try {
     const title = req.params.title;
-    const post = await Post.find({ title: title});
+    const post = await Post.find({ title: title });
 
     if (!post) {
       next(createError(422, "A post with this title does not exist"));
@@ -58,7 +57,7 @@ const getPostByTitle = async (req, res, next) => {
 const getPostByCategory = async (req, res, next) => {
   try {
     const category = req.params.category;
-    const post = await Post.find({ category: category});
+    const post = await Post.find({ category: category });
 
     if (!post) {
       next(createError(422, "There are no posts in this category"));
@@ -96,7 +95,6 @@ const addPost = async (req, res, next) => {
                 schema: {
                     $title: 'Post Title',
                     $body: 'Post body.',
-                    $userid: '1',
                     $category: 'Category Name',
                 }
         }
@@ -111,17 +109,19 @@ const addPost = async (req, res, next) => {
   const schema = Joi.object().keys({
     title: Joi.string().required(),
     body: Joi.string().required(),
-    userid: Joi.string().required(),
     category: Joi.string().required(),
   });
 
-  try{
-    const value = await schema.validateAsync(req.body)
+  try {
+    const value = await schema.validateAsync(req.body);
+
+    //add the id of the signed in user
+    value["userId"] = req.user.id;
 
     const post = new Post({
       title: value.title,
       body: value.body,
-      userid: value.userid,
+      userid: value.userId,
       category: value.category,
     });
 
@@ -131,7 +131,7 @@ const addPost = async (req, res, next) => {
       status: 201,
       message: "New post created",
     });
-  }catch(error){
+  } catch (error) {
     if (error.name == "ValidationError") {
       next(createError.UnprocessableEntity(error.message));
       return;
@@ -161,11 +161,7 @@ const updatePost = async (req, res, next) => {
         */
 
   const document = {};
-  const keys = [
-    "title",
-    "body",
-    "category"
-  ];
+  const keys = ["title", "body", "category"];
 
   for (const key in req.body) {
     if (typeof req.body[key] !== "undefined" && keys.includes(key)) {
@@ -187,17 +183,18 @@ const updatePost = async (req, res, next) => {
   try {
     const value = await schema.validateAsync(document);
 
-    const updateResult = await Post.updateOne({ _id: req.params.id }, { $set: value });
+    const updateResult = await Post.updateOne(
+      { _id: req.params.id },
+      { $set: value }
+    );
 
     return updateResult.modifiedCount > 0
-      ?
-        res.status(200).send(`Post with ID ${req.params.id} was updated successfully`)
-      :
-        updateResult.matchedCount < 1
-        ?
-          next(createError(422, "Post does not exist"))
-        :
-          res.status(200).send("No update was made");
+      ? res
+          .status(200)
+          .send(`Post with ID ${req.params.id} was updated successfully`)
+      : updateResult.matchedCount < 1
+      ? next(createError(422, "Post does not exist"))
+      : res.status(200).send("No update was made");
   } catch (error) {
     if (error instanceof mongoose.CastError) {
       next(createError(422, "Invalid post ID"));
@@ -226,7 +223,9 @@ const deletePost = async (req, res, next) => {
       return;
     }
 
-    res.status(200).send(`Post with ID ${req.params.id} was deleted successfully`);
+    res
+      .status(200)
+      .send(`Post with ID ${req.params.id} was deleted successfully`);
   } catch (error) {
     if (error instanceof mongoose.CastError) {
       next(createError(422, "Invalid User ID"));
@@ -235,7 +234,6 @@ const deletePost = async (req, res, next) => {
     next(error);
   }
 };
-
 
 module.exports = {
   getAllPost,

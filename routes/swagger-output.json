@@ -19,12 +19,10 @@
         "read:user": "read user data"
       }
     }
-  }
+  },
   "host": "blog-api-group-3.herokuapp.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
@@ -232,10 +230,7 @@
                   "example": "Potter11?"
                 }
               },
-              "required": [
-                "email",
-                "password"
-              ]
+              "required": ["email", "password"]
             }
           }
         ],
@@ -311,12 +306,7 @@
                   "example": "Category Name"
                 }
               },
-              "required": [
-                "title",
-                "body",
-                "userid",
-                "category"
-              ]
+              "required": ["title", "body", "userid", "category"]
             }
           }
         ],
@@ -376,11 +366,7 @@
                   "example": "Category Name"
                 }
               },
-              "required": [
-                "title",
-                "body",
-                "category"
-              ]
+              "required": ["title", "body", "category"]
             }
           }
         ],
@@ -491,10 +477,7 @@
                   "example": "01/01/2022"
                 }
               },
-              "required": [
-                "title",
-                "category"
-              ]
+              "required": ["title", "category"]
             }
           }
         ],
@@ -596,10 +579,7 @@
                   "example": "01/01/2022"
                 }
               },
-              "required": [
-                "title",
-                "category"
-              ]
+              "required": ["title", "category"]
             }
           }
         ],
@@ -720,10 +700,7 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": [
-                "comment",
-                "postId"
-              ]
+              "required": ["comment", "postId"]
             }
           }
         ],
@@ -757,10 +734,7 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": [
-                "comment",
-                "postId"
-              ]
+              "required": ["comment", "postId"]
             }
           }
         ],

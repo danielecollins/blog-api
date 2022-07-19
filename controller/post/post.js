@@ -175,9 +175,9 @@ const updatePost = async (req, res, next) => {
   }
 
   const schema = Joi.object().keys({
-    title: Joi.string().required(),
-    body: Joi.string().required(),
-    category: Joi.string().required(),
+    title: Joi.string(),
+    body: Joi.string(),
+    category: Joi.string(),
   });
 
   try {

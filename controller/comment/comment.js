@@ -161,6 +161,7 @@ const updateComment = async (req, res, next) => {
         }
         #swagger.responses[200] = {
             description: "Comment Updated"
+          }
         #swagger.responses[422] = {
             description: 'Please provide information to be updated,No update was made'}
             

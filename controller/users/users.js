@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const getUser = async (req, res, next) => {
   try {
-    const result = await User.find();
+    const result = await User.find().lean();
 
     if (result.length === 0) {
       next(createError(404, "No users found"));

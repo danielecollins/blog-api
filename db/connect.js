@@ -22,10 +22,6 @@ const initDb = (callback) => {
     });
 };
 
-const closeDb = () => {
-  mongoose.connection.close();
-};
-
 const getDb = () => {
   if (!_db) {
     throw Error("Db not initialized");
@@ -36,5 +32,4 @@ const getDb = () => {
 module.exports = {
   initDb,
   getDb,
-  closeDb,
 };

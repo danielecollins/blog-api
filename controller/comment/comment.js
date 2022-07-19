@@ -8,7 +8,7 @@ const getCommentByPostId = async (req, res, next) => {
   // #swagger.description = 'Get comment by PostId'
   
         #swagger.responses[200] = {
-            description: [array of comments]}
+            description: 'array of comments'}
         #swagger.responses[422] = {
             description: 'No comments for this post'}
             
@@ -31,7 +31,7 @@ const getCommentByID = async (req, res, next) => {
   // #swagger.description = 'Get comment by CommentId'
 
         #swagger.responses[200] = {
-            description: {a comment object}}
+            description: 'a comment object'}
         #swagger.responses[422] = {
             description: 'Invalid comment ID'}
             
@@ -95,7 +95,7 @@ const getCommentByUserID = async (req, res, next) => {
   // #swagger.description = 'Get comment by UserId'
   
         #swagger.responses[200] = {
-            description: [array of comments]}
+            description: 'array of comments'}
         #swagger.responses[422] = {
             description: 'No comments for this post'}
             

@@ -37,7 +37,4 @@ routes.put("/:id", isAuth, updatePost);
 //Delete a post
 routes.delete("/:id", isAuth, deletePost);
 
-//auth login
-routes.use("/auth", Authroute);
-
 module.exports = routes;

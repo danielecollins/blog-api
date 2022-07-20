@@ -6,7 +6,7 @@ const doc = {
     description:
       "A Blog API that allows authors to publish posts and comment on other posts",
   },
-  host: "http://blog-api-group-3.herokuapp.com/users/auth/google",
+  host: "blog-api-group-3.herokuapp.com",
   schemes: ["https"],
 };
 

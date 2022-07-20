@@ -20,7 +20,7 @@
       }
     }
   },
-  "host": "http://blog-api-group-3.herokuapp.com",
+  "host": "blog-api-group-3.herokuapp.com",
   "basePath": "/",
   "schemes": [
     "https"

@@ -22,7 +22,9 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/": {
       "get": {
@@ -230,7 +232,10 @@
                   "example": "Potter11?"
                 }
               },
-              "required": ["email", "password"]
+              "required": [
+                "email",
+                "password"
+              ]
             }
           }
         ],
@@ -273,22 +278,51 @@
       "get": {
         "description": "",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       },
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      },
-      "put": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      },
-      "delete": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Create a post",
+        "parameters": [
+          {
+            "name": "Post",
+            "in": "body",
+            "description": "Create a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Post Title"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "Post body."
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Category Name"
+                }
+              },
+              "required": [
+                "title",
+                "body",
+                "category"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post successfully created"
+          },
+          "422": {
+            "description": "Please check the provided data"
+          }
+        }
       }
     },
     "/posts/{id}": {
@@ -302,7 +336,71 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Post",
+            "in": "body",
+            "description": "Update a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Post Title"
+                },
+                "body": {
+                  "type": "string",
+                  "example": "Post body."
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Category Name"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post successfully updated"
+          },
+          "422": {
+            "description": "Please provide information to be updated, Post does not exist, No update was made, Invalid post ID"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an existing post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post successfully Deleted"
+          },
+          "422": {
+            "description": "Please check the provided post Id"
+          }
+        }
       }
     },
     "/posts/title/{title}": {
@@ -316,7 +414,11 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/posts/category/{category}": {
@@ -330,38 +432,93 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
-    "/posts/user/{user}": {
+    "/posts/user/{userid}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "user",
+            "name": "userid",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/courses/": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "Adds a new Course",
+        "parameters": [
+          {
+            "name": "Course",
+            "in": "body",
+            "description": "New Course",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "CSE341"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Web Development"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "01/01/2022"
+                }
+              },
+              "required": [
+                "title",
+                "category"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "New Course Created"
+          },
+          "422": {
+            "description": "Course could not be created"
+          },
+          "500": {
+            "description": "\"attribute\" is not allowed to be empty"
+          }
+        }
       },
       "get": {
-        "description": "",
+        "description": "Gets all Courses",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "404": {
+            "description": "No Courses Found"
+          }
+        }
       }
     },
     "/courses/title/{title}": {
       "get": {
-        "description": "",
+        "description": "Gets all Courses with the given title",
         "parameters": [
           {
             "name": "title",
@@ -370,12 +527,19 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "404": {
+            "description": "No Courses Found"
+          }
+        }
       }
     },
     "/courses/{id}": {
       "get": {
-        "description": "",
+        "description": "Gets one Course using its ID",
         "parameters": [
           {
             "name": "id",
@@ -384,22 +548,74 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "404": {
+            "description": "Course does not exist"
+          },
+          "422": {
+            "description": "Invalid Course ID"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       },
       "put": {
-        "description": "",
+        "description": "Updates Course",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "Course",
+            "in": "body",
+            "description": "Update Course",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "CSE341"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Web Development"
+                },
+                "date": {
+                  "type": "string",
+                  "example": "01/01/2022"
+                }
+              },
+              "required": [
+                "title",
+                "category"
+              ]
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Course successfully updated"
+          },
+          "422": {
+            "description": "Invalid course ID"
+          },
+          "500": {
+            "description": "\"attribute\" is not allowed to be empty"
+          }
+        }
       },
       "delete": {
-        "description": "",
+        "description": "Gets all Courses with the given title",
         "parameters": [
           {
             "name": "id",
@@ -408,7 +624,14 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successful Get Request"
+          },
+          "422": {
+            "description": "No Courses Found or Bad Course ID"
+          }
+        }
       }
     },
     "/comments/postId/{postId}": {
@@ -424,7 +647,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "array of comments"
+          },
+          "422": {
+            "description": "No comments for this post"
           }
         }
       }
@@ -442,7 +668,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "a comment object"
+          },
+          "422": {
+            "description": "Invalid comment ID"
           }
         }
       },
@@ -490,13 +719,19 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": ["comment", "postId"]
+              "required": [
+                "comment",
+                "postId"
+              ]
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Comment Updated"
+          },
+          "422": {
+            "description": "Please provide information to be updated,No update was made"
           }
         }
       }
@@ -521,7 +756,10 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": ["comment", "postId"]
+              "required": [
+                "comment",
+                "postId"
+              ]
             }
           }
         ],
@@ -535,13 +773,23 @@
         }
       }
     },
-    "/comments/user/comment": {
+    "/comments/user/{userId}": {
       "get": {
         "description": "Get comment by UserId",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "array of comments"
+          },
+          "422": {
+            "description": "No comments for this post"
           }
         }
       }

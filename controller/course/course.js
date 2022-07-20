@@ -22,8 +22,9 @@ const addCourse = async (req, res, next) => {
       date: '01/01/2022',
       }
   }
-  #swagger.responses[201] = { description: 'Course successfully added' }
-  #swagger.responses[422] = { description: 'Kindly check the provided data' }
+  #swagger.responses[201] = { description: 'New Course Created' }
+  #swagger.responses[422] = { description: 'Course could not be created' }
+  #swagger.responses[500] = { description: '\"attribute\" is not allowed to be empty' }
   */
   try {
     const value = await schema.validateAsync(req.body);
@@ -35,7 +36,11 @@ const addCourse = async (req, res, next) => {
     if(!savedCourse) {
       return next(createError(422, "Course could not be created"));
     }
-    res.status(201).json(savedCourse);
+    res.json({
+      status: 201,
+      message: "New Course Created",
+      course: savedCourse
+    });
   } 
   catch (error) {
     next(error);
@@ -54,7 +59,11 @@ const getAllCourses = async (req, res, next) => {
     if (result.length === 0) {
       return next(createError(404, "No courses found"));
     }
-    res.status(200).json(result);
+    res.json({
+      status: 200,
+      message: "Successful Get Request",
+      result: result,
+    });
   } 
   catch (error) {
     next(error);
@@ -69,15 +78,20 @@ const getCourseId = async (req, res, next) => {
   #swagger.responses[422] = { description: 'Invalid Course ID' }
   */
   try {
-    const course = await Course.findById(req.params.id);
+    const result = await Course.findById(req.params.id);
 
-    if (!course) {
+    if (!result) {
       next(createError(404, "Course does not exist"));
       return;
     }
 
-    res.status(200).json(course);
-  } catch (error) {
+    res.json({
+      status: 200,
+      message: "Successful Get Request",
+      result: result,
+    });
+  } 
+  catch (error) {
     if (error instanceof mongoose.CastError) {
       return next(createError(422, "Invalid Course ID"));
     }
@@ -92,12 +106,16 @@ const getCourseTitle = async (req, res, next) => {
   #swagger.responses[404] = { description: 'No Courses Found' }
   */
   try {
-    const result = await Course.find({ title: req.params.title })
+    const result = await Course.findOne({ title: req.params.title });
 
     if (result.length === 0) {
       return next(createError(404, "No courses found"));
     }
-    res.status(200).json(result);
+    res.json({
+      status: 200,
+      message: "Successful Get Request",
+      result: result,
+    });
   } 
   catch (error) {
     next(error);
@@ -116,8 +134,9 @@ const updateCourse = async (req, res, next) => {
       date: '01/01/2022',
       }
   }
-  #swagger.responses[201] = { description: 'Course successfully added' }
-  #swagger.responses[422] = { description: 'Kindly check the provided data' }
+  #swagger.responses[201] = { description: 'Course successfully updated' }
+  #swagger.responses[422] = { description: 'Invalid course ID' }
+  #swagger.responses[500] = { description: '\"attribute\" is not allowed to be empty' }
   */
   try {
     const value = await schema.validateAsync(req.body);
@@ -129,9 +148,11 @@ const updateCourse = async (req, res, next) => {
     );
 
     if(result.modifiedCount > 0){
-        res
-          .status(200)
-          .send(`Course ${req.params.id} was updated succesfully`)
+        res.json({
+          status: 200,
+          message: `Course ${req.params.id} was updated succesfully`,
+          result: result
+        })
     }
     else if (result.matchedCount < 1)
         next(createError(422, "Course does not exist"))

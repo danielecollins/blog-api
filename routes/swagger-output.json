@@ -20,9 +20,11 @@
       }
     }
   },
-  "host": "blog-api-group-3.herokuapp.com",
+  "host": "http://blog-api-group-3.herokuapp.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/": {
       "get": {
@@ -230,7 +232,10 @@
                   "example": "Potter11?"
                 }
               },
-              "required": ["email", "password"]
+              "required": [
+                "email",
+                "password"
+              ]
             }
           }
         ],
@@ -302,7 +307,11 @@
                   "example": "Category Name"
                 }
               },
-              "required": ["title", "body", "category"]
+              "required": [
+                "title",
+                "body",
+                "category"
+              ]
             }
           }
         ],
@@ -361,8 +370,7 @@
                   "type": "string",
                   "example": "Category Name"
                 }
-              },
-              "required": ["title", "body", "category"]
+              }
             }
           }
         ],
@@ -473,16 +481,25 @@
                   "example": "01/01/2022"
                 }
               },
-              "required": ["title", "category"]
+              "required": [
+                "title",
+                "category"
+              ]
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
-            "description": "Course successfully added"
+            "description": "New Course Created"
           },
           "422": {
-            "description": "Kindly check the provided data"
+            "description": "Course could not be created"
+          },
+          "500": {
+            "description": "\"attribute\" is not allowed to be empty"
           }
         }
       },
@@ -575,7 +592,10 @@
                   "example": "01/01/2022"
                 }
               },
-              "required": ["title", "category"]
+              "required": [
+                "title",
+                "category"
+              ]
             }
           }
         ],
@@ -584,10 +604,13 @@
             "description": "OK"
           },
           "201": {
-            "description": "Course successfully added"
+            "description": "Course successfully updated"
           },
           "422": {
-            "description": "Kindly check the provided data"
+            "description": "Invalid course ID"
+          },
+          "500": {
+            "description": "\"attribute\" is not allowed to be empty"
           }
         }
       },
@@ -696,7 +719,10 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": ["comment", "postId"]
+              "required": [
+                "comment",
+                "postId"
+              ]
             }
           }
         ],
@@ -730,7 +756,10 @@
                   "example": "Pottesuidhnkr"
                 }
               },
-              "required": ["comment", "postId"]
+              "required": [
+                "comment",
+                "postId"
+              ]
             }
           }
         ],
@@ -744,10 +773,17 @@
         }
       }
     },
-    "/comments/user/comment": {
+    "/comments/user/{userId}": {
       "get": {
         "description": "Get comment by UserId",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "array of comments"

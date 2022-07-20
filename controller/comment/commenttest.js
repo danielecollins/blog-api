@@ -38,8 +38,8 @@ beforeAll(async () => {
 
   test("Log User In", async () => {
     const response = await testRequest.post("/users/auth/login").send({
-      email: process.env.email,
-      password: process.env.password,
+      email: "professor@byui.edu",
+      password: "Potter11?",
     });
 
     expect(response.text).toBe("User successfully Logged In");

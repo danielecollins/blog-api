@@ -1,3 +1,3 @@
 const { courseTest } = require("../controller/course/coursetest");
 
-describe("Test Course Controllers", courseTest);
+describe("Test Course Controller", courseTest);

@@ -78,14 +78,18 @@ const getCourseId = async (req, res, next) => {
   #swagger.responses[422] = { description: 'Invalid Course ID' }
   */
   try {
-    const course = await Course.findById(req.params.id);
+    const result = await Course.findById(req.params.id);
 
-    if (!course) {
+    if (!result) {
       next(createError(404, "Course does not exist"));
       return;
     }
 
-    res.status(200).json(course);
+    res.json({
+      status: 200,
+      message: "Successful Get Request",
+      result: result,
+    });
   } 
   catch (error) {
     if (error instanceof mongoose.CastError) {
@@ -102,12 +106,16 @@ const getCourseTitle = async (req, res, next) => {
   #swagger.responses[404] = { description: 'No Courses Found' }
   */
   try {
-    const result = await Course.find({ title: req.params.title })
+    const result = await Course.findOne({ title: req.params.title });
 
     if (result.length === 0) {
       return next(createError(404, "No courses found"));
     }
-    res.status(200).json(result);
+    res.json({
+      status: 200,
+      message: "Successful Get Request",
+      result: result,
+    });
   } 
   catch (error) {
     next(error);
@@ -140,7 +148,7 @@ const updateCourse = async (req, res, next) => {
     );
 
     if(result.modifiedCount > 0){
-        res.send({
+        res.json({
           status: 200,
           message: `Course ${req.params.id} was updated succesfully`,
           result: result

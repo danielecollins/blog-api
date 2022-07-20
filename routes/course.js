@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const courseController = require("../controller/course/course");
-const Authroute = require("./auth");
 
 const isAuth = async (req, res, next) => {
   if (req.user) {
@@ -17,8 +16,5 @@ router.get("/title/:title", courseController.getCourseTitle);
 router.get("/:id", courseController.getCourseId);
 router.put("/:id", isAuth, courseController.updateCourse);
 router.delete("/:id", isAuth, courseController.deleteCourse);
-
-//auth login
-router.use("/auth", Authroute);
 
 module.exports = router;

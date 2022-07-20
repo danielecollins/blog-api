@@ -6,11 +6,11 @@ const doc = {
     description:
       "A Blog API that allows authors to publish posts and comment on other posts",
   },
-  host: "localhost:3000",
-  schemes: ["http"],
+  host: "http://blog-api-group-3.herokuapp.com/users/auth/google",
+  schemes: ["https"],
 };
 
-const outputFile = "./routes/swagger-output local.json";
+const outputFile = "./routes/swagger-output.json";
 const endpointsFiles = ["./routes/index.js"];
 
 /* NOTE: if you use the express Router, you must pass in the 

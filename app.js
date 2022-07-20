@@ -20,7 +20,7 @@ app.use(
     keys: [process.env.keys],
   })
 );
-passport
+//passport
 app.enable("trust proxy");
 app.use(passport.initialize());
 app.use(passport.session());

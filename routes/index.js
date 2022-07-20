@@ -1,7 +1,7 @@
 const routes = require("express").Router();
 const createError = require("http-errors");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger-output.json");
+const swaggerDocument = require("./swagger-output local.json");
 const UsersRoutes = require("./users");
 const PostsRoutes = require("./posts");
 const CommentsRoutes = require("./comment");

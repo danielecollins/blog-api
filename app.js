@@ -2,9 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const Routes = require("./routes");
-//const passportSetup = require("./config/passport-setup");
+const passportSetup = require("./config/passport-setup");
 const cookieSession = require("cookie-session");
-//const passport = require("passport");
+const passport = require("passport");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -21,9 +21,9 @@ app.use(
   })
 );
 //passport
-//app.enable("trust proxy");
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.enable("trust proxy");
+app.use(passport.initialize());
+app.use(passport.session());
 
 //enabling CORS for all requests
 app.use(cors());

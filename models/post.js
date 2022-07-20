@@ -22,7 +22,6 @@ const postSchema = new mongoose.Schema(
   {
     strict: false,
     collection: "posts",
-    
   }
 );
 
